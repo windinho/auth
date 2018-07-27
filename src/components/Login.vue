@@ -42,7 +42,12 @@
 	</div>
 </template>
 <script>
+	import Vue from 'vue'
 	import { store } from '@/store/store'
+	import resource from 'vue-resource'
+
+	Vue.use(resource)
+
 	export default {
 		store: store,
 		data () {
@@ -73,6 +78,11 @@
 			signout() {
 				this.loggedIn = false
 			}
+		},
+		created: function () {
+			this.$http.get('https://jsonplaceholder.typicode.com/users')
+			// .then(response => response.json())
+			.then(json => console.log(json.data))
 		}
 	}
 </script>
